@@ -20,7 +20,7 @@
 
   Josh Gonzales
  */
- 
+
 const int photocellPin = A5;     // the cell and 10K pulldown are connected to a5
 int photocellReading;     // the analog reading from the analog resistor divider
 
@@ -32,7 +32,7 @@ const int led[16] = {1,A2,A0,A1,4,5,2,3,6,9,8,7,13,11,12,10};
 // the setup function runs once when you press reset or power the board
 void setup() {
   // We'll send debugging information via the Serial monitor
-  //Serial.begin(9600); 
+  //Serial.begin(9600);
   // initialize all digital and analog pins as output.
   int i = 0;
   while(i< 16){
@@ -46,11 +46,11 @@ void setup() {
 
 // the loop function runs over and over again forever
 void loop() {
-  //photocellReading = analogRead(photocellPin);  
- 
+  //photocellReading = analogRead(photocellPin);
+
   //Serial.print("Analog reading = ");
   //Serial.print(photocellReading);     // the raw analog reading
- 
+
   // We'll have a few threshholds, qualitatively determined
   //if (photocellReading < 10) {
     //Serial.println(" - Dark");
@@ -63,29 +63,37 @@ void loop() {
  // } else {
   //  Serial.println(" - Very bright");
  // }
- 
+
  /* The following calls on the animation routines. The variable i
  is used to seed the refresh speed */
+ for (int i=35;i<45;i++){
+   DiagonalShiftRight(i);
+ };
+
+ for (int i=45;i>35;i--){
+   DiagonalShiftLeft(i);
+ };
+
  for (int i=15;i<30;i++){
    SquareZoom(i);
  };
- 
+
  for (int i=5;i<10;i++){
    SquareShift(i);
  };
- 
+
  for (int i=5;i<10;i++){
    RainAnimation(i);
  };
- 
+
  for (int i=5;i<10;i++){
    SquareSpinLeft(i);
  };
- 
+
  for (int i=5;i<10;i++){
    SquareSpinRight(i);
  };
-  
+
 }
 
 void UpdateDisplay(byte display_byte[2]) {
@@ -93,7 +101,7 @@ void UpdateDisplay(byte display_byte[2]) {
 //highest order bits are checked to determine if it is a 1 for on
 //or a 0 for off. Due to reverse order checking, the second byte is
 //checked first and then the first byte.
- 
+
  //iterate through second byte and determine if on or off
  int i = 15;
  while(i>=8){
@@ -106,7 +114,7 @@ void UpdateDisplay(byte display_byte[2]) {
    i--;
    display_byte[1] >>= 1;
  }
- 
+
  // iterate through first byte and determine to turn LED on or off
  while(i>=0){
    if (display_byte[0] & 0x1) {
@@ -119,7 +127,7 @@ void UpdateDisplay(byte display_byte[2]) {
    display_byte[0] >>=1;
  }
 }
- 
+
 void RainAnimation(int speed) {
 // Animation that looks like rain.
 byte data[14][2] = {
@@ -143,7 +151,7 @@ byte data[14][2] = {
  for (int x=0; x < 14; x++) {
    UpdateDisplay(data[x]);
    delay(500 - (20 * speed));
-  }; 
+  };
 }
 
 void SquareSpinLeft(int speed) {
@@ -170,7 +178,7 @@ byte data[14][2] = {
    UpdateDisplay(data[x]);
    delay(200 - (10 * speed));
  };
-  
+
 }
 
 void SquareSpinRight(int speed) {
@@ -211,7 +219,7 @@ byte data[3][2] = {
  for (int x=0; x < 3; x++) {
    UpdateDisplay(data[x]);
    delay(500 - (15 * speed));
- }; 
+ };
 }
 
 void SquareShift(int speed) {
@@ -239,7 +247,47 @@ byte data[16][2] = {
  for (int x=0; x < 16; x++) {
    UpdateDisplay(data[x]);
    delay(500 - (25 * speed));
- }; 
+ };
+}
+
+void DiagonalShiftRight(int speed) {
+// A sweeping diagonal animation
+
+byte data[8][2] = {
+  {B00000000, B00000000},
+  {B10000000, B00000000},
+  {B01001000, B00000000},
+  {B00100100, B10000000},
+  {B00010010, B01001000},
+  {B00000001, B00100100},
+  {B00000000, B00010010},
+  {B00000000, B00000001}
+};
+
+for (int x=0; x < 8; x++) {
+  UpdateDisplay(data[x]);
+  delay(500 - (10 * speed));
+};
+}
+
+void DiagonalShiftLeft(int speed) {
+// A sweeping diagonal animation
+
+byte data[8][2] = {
+  {B00000000, B00000000},
+  {B10000000, B00000000},
+  {B01001000, B00000000},
+  {B00100100, B10000000},
+  {B00010010, B01001000},
+  {B00000001, B00100100},
+  {B00000000, B00010010},
+  {B00000000, B00000001}
+};
+
+for (int x=7; x >= 0; x--) {
+  UpdateDisplay(data[x]);
+  delay(500 - (10 * speed));
+};
 }
 
 void BootAnimation() {
@@ -273,7 +321,5 @@ for (int x=0; x < 2; x++) {
   UpdateDisplay(dataJG[x]);
   delay(2200);
 };
-  
+
 }
-
-
