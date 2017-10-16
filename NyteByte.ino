@@ -67,6 +67,9 @@ void loop() {
  /* The following calls on the animation routines. The variable i
  is used to seed the refresh speed */
  for (int i=35;i<45;i++){
+   SingleOff(i);
+ }
+ for (int i=35;i<45;i++){
    DiagonalShiftRight(i);
  };
 
@@ -290,7 +293,7 @@ for (int x=7; x >= 0; x--) {
 };
 }
 
-void SingleOff() {
+void SingleOff(int speed) {
 // All LEDs on at once and a single LED turns off at a time.
   byte data[17][2] = {
     {B11111111, B11111111},
@@ -311,7 +314,7 @@ void SingleOff() {
     {B11111111, B11111101},
     {B11111111, B11111110}
   };
-   
+
   for (int x=0; x < 17; x++) {
     UpdateDisplay(data[x]);
     delay(500 - (10 * speed));
