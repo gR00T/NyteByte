@@ -290,6 +290,34 @@ for (int x=7; x >= 0; x--) {
 };
 }
 
+void SingleOff() {
+// All LEDs on at once and a single LED turns off at a time.
+  byte data[17][2] = {
+    {B11111111, B11111111},
+    {B11101111, B11111111},
+    {B11011111, B11111111},
+    {B10111111, B11111111},
+    {B01111111, B11111111},
+    {B11110111, B11111111},
+    {B11111011, B11111111},
+    {B11111101, B11111111},
+    {B11111110, B11111111},
+    {B11111111, B11101111},
+    {B11111111, B11011111},
+    {B11111111, B10111111},
+    {B11111111, B01111111},
+    {B11111111, B11110111},
+    {B11111111, B11111011},
+    {B11111111, B11111101},
+    {B11111111, B11111110}
+  };
+   
+  for (int x=0; x < 17; x++) {
+    UpdateDisplay(data[x]);
+    delay(500 - (10 * speed));
+  };
+}
+
 void BootAnimation() {
 // Runs a smiley face animation upon bootup
 byte data[12][2] = {
