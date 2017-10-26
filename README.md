@@ -1,5 +1,5 @@
 # NyteByte
 
-<img src='PCB.jpg' height=50% width=50% />
+<center><img src='PCB.jpg' height=50% width=50% /></center>
 
-<img src='PCB.jpg' height=150 width=50 />
+
