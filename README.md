@@ -1,5 +1,5 @@
 # NyteByte
 
-![NYTEBYTE PCB](PCB.jpg?raw=true | width=100)
+<img src='PCB.jpg' height=50% width=50% />
 
-![NYTEBYTE PCB](PCB.jpg?raw=true =250x250)
+<img src='PCB.jpg' height=150 width=50 />
