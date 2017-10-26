@@ -66,7 +66,7 @@ void loop() {
 
  /* The following calls on the animation routines. The variable i
  is used to seed the refresh speed */
- for (int i=35;i<45;i++){
+ for (int i=15;i<25;i++){
    SingleOff(i);
  }
  for (int i=35;i<45;i++){
