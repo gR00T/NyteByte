@@ -1,3 +1,3 @@
 # NyteByte
 
-![NYTEBYTE PCB](PCB.jpg?raw=true "Title")
+![NYTEBYTE PCB](PCB.jpg?raw=true)
